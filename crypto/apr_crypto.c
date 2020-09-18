@@ -67,7 +67,7 @@ typedef struct apr_crypto_clear_t {
     apr_size_t size;
 } apr_crypto_clear_t;
 
-#if !APU_DSO_BUILD
+#if !APU_DSO_BUILD || defined(APU_MODULE_DECLARE_STATIC)
 #define DRIVER_LOAD(name,driver_name,pool,params,rv,result) \
     {   \
         extern const apr_crypto_driver_t driver_name; \
@@ -219,6 +219,20 @@ APU_DECLARE(apr_status_t) apr_crypto_get_driver(
     }
 
 #if APU_DSO_BUILD
+#ifdef APU_MODULE_DECLARE_STATIC
+    rv = APR_ENOTIMPL;
+#if APU_HAVE_OPENSSL
+    if (name[0] == 'o' && !strcmp(name, "openssl")) {
+        DRIVER_LOAD("openssl", apr_crypto_openssl_driver, pool, params, rv, result);
+    }
+#endif
+    if (rv == APR_SUCCESS) {
+        apu_dso_mutex_unlock();
+        return APR_SUCCESS;
+    }
+    *driver = NULL;
+#endif
+
     /* The driver DSO must have exactly the same lifetime as the
      * drivers hash table; ignore the passed-in pool */
     pool = apr_hash_pool_get(drivers);

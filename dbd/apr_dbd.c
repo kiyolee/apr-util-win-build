@@ -65,7 +65,7 @@ APU_DECLARE(apr_status_t) apr_dbd_mutex_unlock() {
 }
 #endif
 
-#if !APU_DSO_BUILD
+#if !APU_DSO_BUILD || defined(APU_MODULE_DECLARE_STATIC)
 #define DRIVER_LOAD(name,driver,pool) \
     {   \
         extern const apr_dbd_driver_t driver; \
@@ -118,7 +118,7 @@ APU_DECLARE(apr_status_t) apr_dbd_init(apr_pool_t *pool)
     /* This already registers a pool cleanup */
 #endif
 
-#if !APU_DSO_BUILD
+#if !APU_DSO_BUILD || defined(APU_MODULE_DECLARE_STATIC)
 
     /* Load statically-linked drivers: */
 #if APU_HAVE_MYSQL
