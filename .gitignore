@@ -15,3 +15,6 @@
 /build-*/tests/*/x64/Release
 /build-*/x64/Debug
 /build-*/x64/Release
+/test/data/test-sdbm.*
+/test/manyfile.bin
+/test/testfile.txt
