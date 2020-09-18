@@ -32,7 +32,7 @@
 #endif
 
 /* Presume a standard, modern (5.x) mysql sdk */
-#define HAVE_MY_GLOBAL_H        1
+/* #undef HAVE_MY_GLOBAL_H        0 */
 
 /* my_sys.h is broken on VC/Win32, and apparently not required */
 /* #undef HAVE_MY_SYS_H           0 */
@@ -46,6 +46,18 @@
 
 /* define if Expat 1.0 or 1.1 was found */
 /* #undef APR_HAVE_OLD_EXPAT */
+
+/* Define if the inbuf parm to iconv() is const char ** */
+#define APU_ICONV_INBUF_CONST   1
+
+/* Define that OpenSSL uses const buffers */
+#define CRYPTO_OPENSSL_CONST_BUFFERS    1
+
+/* Define to 1 if you have the <iconv.h> header file. */
+#define HAVE_ICONV_H            1
+
+/* Define to 1 if you have the <sql.h> header file. */
+#define HAVE_SQL_H              1
 
 
 #endif /* APU_CONFIG_H */
