@@ -150,7 +150,7 @@ static void test_xml_parser(abts_case *tc, void *data)
 
 static void test_billion_laughs(abts_case *tc, void *data)
 {
-    apr_file_t *fd;
+    apr_file_t *fd = NULL;
     apr_xml_parser *parser;
     apr_xml_doc *doc;
     apr_status_t rv;
@@ -161,9 +161,11 @@ static void test_billion_laughs(abts_case *tc, void *data)
 
     /* Don't test for return value; if it returns, chances are the bug
      * is fixed or the machine has insane amounts of RAM. */
-    apr_xml_parse_file(p, &parser, &doc, fd, 2000);
+    if (fd) {
+        apr_xml_parse_file(p, &parser, &doc, fd, 2000);
 
-    apr_file_close(fd);
+        apr_file_close(fd);
+    }
 }
 
 static void test_CVE_2009_3720_alpha(abts_case *tc, void *data)
