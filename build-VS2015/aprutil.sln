@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aprutil-1", "aprutil-1\aprutil-1.vcxproj", "{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libaprutil-1", "libaprutil-1\libaprutil-1.vcxproj", "{4EC8EB83-3762-483A-8B48-D6F3655C742A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EF1F354E-5B96-43EA-A4CE-81EB67449575}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dbd", "tests\dbd\dbd.vcxproj", "{5940F004-4ACB-434F-BA42-E09C73B6F6A9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A} = {4EC8EB83-3762-483A-8B48-D6F3655C742A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testall", "tests\testall\testall.vcxproj", "{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A} = {4EC8EB83-3762-483A-8B48-D6F3655C742A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Debug|Win32.Build.0 = Debug|Win32
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Debug|x64.ActiveCfg = Debug|x64
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Debug|x64.Build.0 = Debug|x64
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Release|Win32.ActiveCfg = Release|Win32
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Release|Win32.Build.0 = Release|Win32
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Release|x64.ActiveCfg = Release|x64
+		{D3411123-DC89-41D8-ADC2-7E84DD9A08D9}.Release|x64.Build.0 = Release|x64
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Debug|Win32.Build.0 = Debug|Win32
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Debug|x64.ActiveCfg = Debug|x64
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Debug|x64.Build.0 = Debug|x64
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Release|Win32.ActiveCfg = Release|Win32
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Release|Win32.Build.0 = Release|Win32
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Release|x64.ActiveCfg = Release|x64
+		{4EC8EB83-3762-483A-8B48-D6F3655C742A}.Release|x64.Build.0 = Release|x64
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Debug|Win32.Build.0 = Debug|Win32
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Debug|x64.ActiveCfg = Debug|x64
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Debug|x64.Build.0 = Debug|x64
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Release|Win32.ActiveCfg = Release|Win32
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Release|Win32.Build.0 = Release|Win32
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Release|x64.ActiveCfg = Release|x64
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9}.Release|x64.Build.0 = Release|x64
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Debug|Win32.Build.0 = Debug|Win32
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Debug|x64.ActiveCfg = Debug|x64
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Debug|x64.Build.0 = Debug|x64
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Release|Win32.ActiveCfg = Release|Win32
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Release|Win32.Build.0 = Release|Win32
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Release|x64.ActiveCfg = Release|x64
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5940F004-4ACB-434F-BA42-E09C73B6F6A9} = {EF1F354E-5B96-43EA-A4CE-81EB67449575}
+		{44D6BB82-2E58-4A7F-8860-5F467CCE01A4} = {EF1F354E-5B96-43EA-A4CE-81EB67449575}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DB4913DF-0A6B-476B-BE48-65BEEC2B2FF4}
+	EndGlobalSection
+EndGlobal
