@@ -28,3 +28,8 @@ Basically, in a command prompt:
 > \> git clone https://github.com/kiyolee/apr-util-win-build.git  
 
 Build all these dependencies in the suggested order as shown above and finally apr-util, with the same corresponding Visual Studio solution of course.
+
+### Notes:
+
+* dbm odbc and crypto openssl drivers are embedded. Corresponding driver DLLs are neither built nor needed by design.
+* LDAP functionality is not available currently.
