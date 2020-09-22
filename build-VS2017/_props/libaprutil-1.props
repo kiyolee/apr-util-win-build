@@ -17,7 +17,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -30,7 +30,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -43,7 +43,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -56,7 +56,7 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
       <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
