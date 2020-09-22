@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="vs_common.props" />
+    <Import Project="win-build.props" />
+    <Import Project="apr-1-testapp.props" />
+    <Import Project="libiconv-testapp.props" />
+    <Import Project="openssl1_1-testapp.props" />
+    <Import Project="zlib-testapp.props" />
+    <Import Project="expat-testapp.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>setargv.obj;$(OutDir)aprutil-1.lib;$(APR_LIB_DIR)apr-1.lib;ws2_32.lib;mswsock.lib;rpcrt4.lib;crypt32.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>setargv.obj;$(OutDir)aprutil-1.lib;$(APR_LIB_DIR)apr-1.lib;ws2_32.lib;mswsock.lib;rpcrt4.lib;crypt32.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>setargv.obj;$(OutDir)aprutil-1.lib;$(APR_LIB_DIR)apr-1.lib;ws2_32.lib;mswsock.lib;rpcrt4.lib;crypt32.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;XML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>setargv.obj;$(OutDir)aprutil-1.lib;$(APR_LIB_DIR)apr-1.lib;ws2_32.lib;mswsock.lib;rpcrt4.lib;crypt32.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
