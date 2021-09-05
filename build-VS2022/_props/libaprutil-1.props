@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="vs_common.props" />
+    <Import Project="win-build.props" />
+    <Import Project="apr-1.props" />
+    <Import Project="libiconv.props" />
+    <Import Project="openssl1_1.props" />
+    <Import Project="zlib.props" />
+    <Import Project="expat.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;..\..\include\private;$(APR_INC_DIR);$(LIBICONV_INC_DIR);$(OPENSSL_INC_DIR);$(EXPAT_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;crypt32.lib;$(APR_LIB_DIR)libapr-1.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;..\..\include\private;$(APR_INC_DIR);$(LIBICONV_INC_DIR);$(OPENSSL_INC_DIR);$(EXPAT_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;crypt32.lib;$(APR_LIB_DIR)libapr-1.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;..\..\include\private;$(APR_INC_DIR);$(LIBICONV_INC_DIR);$(OPENSSL_INC_DIR);$(EXPAT_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;crypt32.lib;$(APR_LIB_DIR)libapr-1.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\include;..\..\include\private;$(APR_INC_DIR);$(LIBICONV_INC_DIR);$(OPENSSL_INC_DIR);$(EXPAT_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;WINNT;APU_DECLARE_EXPORT;APU_MODULE_DECLARE_STATIC;XML_STATIC;libaprutil_1_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\include;$(APR_INC_DIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(LIBICONV_LIB_DIR);$(OPENSSL_LIB_DIR);$(ZLIB_LIB_DIR);$(EXPAT_LIB_DIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ws2_32.lib;crypt32.lib;$(APR_LIB_DIR)libapr-1.lib;$(LIBICONV_LIBS);$(OPENSSL_LIBS);$(ZLIB_LIBS);$(EXPAT_LIBS);%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
