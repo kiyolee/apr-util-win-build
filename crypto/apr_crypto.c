@@ -232,11 +232,13 @@ APU_DECLARE(apr_status_t) apr_crypto_get_driver(
     }
     *driver = NULL;
 #endif
+#endif
 
-    /* The driver DSO must have exactly the same lifetime as the
+    /* The driver must have exactly the same lifetime as the
      * drivers hash table; ignore the passed-in pool */
     pool = apr_hash_pool_get(drivers);
 
+#if APU_DSO_BUILD
 #if defined(NETWARE)
     apr_snprintf(modname, sizeof(modname), "crypto%s.nlm", name);
 #elif defined(WIN32) || defined(__CYGWIN__)

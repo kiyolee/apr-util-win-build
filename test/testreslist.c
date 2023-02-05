@@ -36,7 +36,7 @@
 #define RESLIST_HMAX 20
 #define RESLIST_TTL  APR_TIME_C(35000) /* 35 ms */
 #define CONSUMER_THREADS 25
-#define CONSUMER_ITERATIONS 250
+#define CONSUMER_ITERATIONS 100
 #define CONSTRUCT_SLEEP_TIME  APR_TIME_C(25000) /* 25 ms */
 #define DESTRUCT_SLEEP_TIME   APR_TIME_C(10000) /* 10 ms */
 #define WORK_DELAY_SLEEP_TIME APR_TIME_C(15000) /* 15 ms */
@@ -258,6 +258,44 @@ static void test_reslist(abts_case *tc, void *data)
     ABTS_INT_EQUAL(tc, APR_SUCCESS, rv);
 }
 
+static void test_reslist_no_ttl(abts_case *tc, void *data)
+{
+    apr_status_t rv;
+    apr_reslist_t *rl;
+    my_parameters_t *params;
+    my_resource_t *res;
+
+    /* Parameters (sleep not used) */
+    params = apr_pcalloc(p, sizeof(*params));
+
+    rv = apr_reslist_create(&rl,
+                            /*no min*/0, /*no smax*/0, /*max*/1, /*no ttl*/0,
+                            my_constructor, my_destructor, params, p);
+    ABTS_INT_EQUAL(tc, APR_SUCCESS, rv);
+
+    /* Acquire/contruct one resource */
+    rv = apr_reslist_acquire(rl, (void **)&res);
+    ABTS_INT_EQUAL(tc, APR_SUCCESS, rv);
+    ABTS_INT_EQUAL(tc, 0, res->id);
+
+    /* Release it before next check */
+    rv = apr_reslist_release(rl, res);
+    ABTS_INT_EQUAL(tc, APR_SUCCESS, rv);
+
+    /* Re-acquire/release: the resource should be the same */
+    rv = apr_reslist_acquire(rl, (void **)&res);
+    ABTS_INT_EQUAL(tc, APR_SUCCESS, rv);
+    ABTS_INT_EQUAL(tc, 0, res->id);
+
+    /* Release it before cleanup */
+    rv = apr_reslist_release(rl, res);
+    ABTS_INT_EQUAL(tc, APR_SUCCESS, rv);
+
+    rv = apr_reslist_destroy(rl);
+    ABTS_INT_EQUAL(tc, APR_SUCCESS, rv);
+    ABTS_INT_EQUAL(tc, params->d_count, 1);
+}
+
 #endif /* APR_HAS_THREADS */
 
 abts_suite *testreslist(abts_suite *suite)
@@ -266,6 +304,7 @@ abts_suite *testreslist(abts_suite *suite)
 
 #if APR_HAS_THREADS
     abts_run_test(suite, test_reslist, NULL);
+    abts_run_test(suite, test_reslist_no_ttl, NULL);
 #endif
 
     return suite;

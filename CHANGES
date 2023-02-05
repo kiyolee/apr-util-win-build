@@ -1,4 +1,24 @@
                                                      -*- coding: utf-8 -*-
+Changes with APR-util 1.6.2
+
+  *) SECURITY: CVE-2022-25147 (cve.mitre.org)
+     Integer Overflow or Wraparound vulnerability in apr_base64 functions 
+     of Apache Portable Runtime Utility (APR-util) allows an attacker to 
+     write beyond bounds of a buffer.
+     
+  *) Teach configure how to find and build against MariaDB 10.2. PR 61517
+     [Kris Karas <bugs-a17 moonlit-rail.com>]
+
+  *) apr_crypto_commoncrypto: Remove stray reference to -lcrypto that
+     prevented commoncrypto being enabled. [Graham Leggett]
+
+  *) Add --tag=CC to libtool invocations. PR 62640. [Michael Osipov]
+
+  *) apr_dbm_gdbm: Fix handling of error codes. This makes gdbm 1.14 work.
+     apr_dbm_gdbm will now also return error codes starting with
+     APR_OS_START_USEERR, as apr_dbm_berkleydb does, instead of always
+     returning APR_EGENERAL. [Stefan Fritsch]
+
 Changes with APR-util 1.6.1
 
   *) Win32: Add function exports from new apr_crypto API's missing in 1.6.0.

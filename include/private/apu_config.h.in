@@ -35,6 +35,9 @@
    you don't. */
 #undef HAVE_DECL_EVP_PKEY_CTX_NEW
 
+/* Define to 1 if you have the <errmsg.h> header file. */
+#undef HAVE_ERRMSG_H
+
 /* Define if expat.h is available */
 #undef HAVE_EXPAT_H
 
@@ -62,11 +65,11 @@
 /* Define to 1 if you have the <libpq-fe.h> header file. */
 #undef HAVE_LIBPQ_FE_H
 
-/* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
-
 /* Define if memset_s function is supported */
 #undef HAVE_MEMSET_S
+
+/* Define to 1 if you have the <mysql/errmsg.h> header file. */
+#undef HAVE_MYSQL_ERRMSG_H
 
 /* Define to 1 if you have the <mysql.h> header file. */
 #undef HAVE_MYSQL_H
@@ -128,6 +131,9 @@
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
 
+/* Define to 1 if you have the <stdio.h> header file. */
+#undef HAVE_STDIO_H
+
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
 
@@ -179,5 +185,7 @@
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
-/* Define to 1 if you have the ANSI C header files. */
+/* Define to 1 if all of the C90 standard headers exist (not just the ones
+   required in a freestanding environment). This macro is provided for
+   backward compatibility; new code need not use it. */
 #undef STDC_HEADERS

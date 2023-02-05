@@ -2,7 +2,7 @@
 
 Apache apr-util Windows build with Visual Studio.
 
-This version is apr-util-1.6.1.
+This version is apr-util-1.6.3.
 
 To build, simply open the required solution file, and
 you know how to use Visual Studio, right?
