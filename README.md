@@ -11,7 +11,7 @@ you know how to use Visual Studio, right?
 Depends on:
 * libiconv-win-build  
 * zlib-win-build  
-* openssl1_1-win-build  
+* openssl3-win-build  
 * expat-win-build  
 * apr-win-build  
 
@@ -22,7 +22,7 @@ Basically, in a command prompt:
 > \> cd {somewhere}\\  
 > \> git clone https://github.com/kiyolee/libiconv-win-build.git  
 > \> git clone https://github.com/kiyolee/zlib-win-build.git  
-> \> git clone https://github.com/kiyolee/openssl1_1-win-build.git  
+> \> git clone https://github.com/kiyolee/openssl3-win-build.git  
 > \> git clone https://github.com/kiyolee/expat-win-build.git  
 > \> git clone https://github.com/kiyolee/apr-win-build.git  
 > \> git clone https://github.com/kiyolee/apr-util-win-build.git  
