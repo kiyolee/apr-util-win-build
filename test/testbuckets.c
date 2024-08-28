@@ -19,6 +19,10 @@
 #include "apr_buckets.h"
 #include "apr_strings.h"
 
+#ifdef _MSC_VER
+#define strdup _strdup
+#endif
+
 static void test_create(abts_case *tc, void *data)
 {
     apr_bucket_alloc_t *ba;

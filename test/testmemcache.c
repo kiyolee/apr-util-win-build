@@ -27,6 +27,10 @@
 #include <stdlib.h>		/* for exit() */
 #endif
 
+#ifdef _MSC_VER
+#define getpid _getpid
+#endif
+
 #define HOST "localhost"
 #define PORT 11211
 

@@ -18,6 +18,10 @@
 #include "abts_tests.h"
 #include "testutil.h"
 
+#ifdef _MSC_VER
+#define isatty _isatty
+#endif
+
 #define ABTS_STAT_SIZE 6
 static char status[ABTS_STAT_SIZE] = {'|', '/', '-', '|', '\\', '-'};
 static int curr_char;
