@@ -5,7 +5,7 @@
     <Import Project="win-build.props" />
     <Import Project="apr-1.props" />
     <Import Project="libiconv.props" />
-    <Import Project="openssl3.props" />
+    <Import Project="openssl1_1.props" />
     <Import Project="zlib.props" />
     <Import Project="expat.props" />
   </ImportGroup>
