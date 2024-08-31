@@ -12,7 +12,11 @@
     <OPENSSL_INC_DIR>..\..\..\..\openssl3-win-build\$(BUILD_VSENV)\$(Platform)\$(Configuration)\include\</OPENSSL_INC_DIR>
     <OPENSSL_LIB_DIR>..\..\..\..\openssl3-win-build\$(BUILD_VSENV)\$(Platform)\$(Configuration)\</OPENSSL_LIB_DIR>
   </PropertyGroup>
-  <ItemDefinitionGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>OPENSSL_API_COMPAT=10101;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="OPENSSL_INC_DIR">
       <Value>$(OPENSSL_INC_DIR)</Value>

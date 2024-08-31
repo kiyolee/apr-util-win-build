@@ -138,8 +138,12 @@ static apr_status_t crypto_init(apr_pool_t *pool, const char *params,
     ERR_load_crypto_strings();
     /* SSL_load_error_strings(); */
     OpenSSL_add_all_algorithms();
+#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+    OPENSSL_init_crypto(OPENSSL_INIT_ENGINE_ALL_BUILTIN, NULL);
+#else
     ENGINE_load_builtin_engines();
     ENGINE_register_all_complete();
+#endif
 
     apr_pool_cleanup_register(pool, pool, crypto_shutdown_helper,
             apr_pool_cleanup_null);
@@ -205,8 +209,12 @@ static apr_status_t crypto_cleanup(apr_crypto_t *f)
 {
 
     if (f->config->engine) {
+#if (OPENSSL_VERSION_NUMBER < 0x30000000L) || (OPENSSL_API_LEVEL < 30000)
         ENGINE_finish(f->config->engine);
         ENGINE_free(f->config->engine);
+#else
+        // FIXME: Use providers instead for OpenSSL 3.
+#endif
         f->config->engine = NULL;
     }
     return APR_SUCCESS;
@@ -323,6 +331,7 @@ static apr_status_t crypto_make(apr_crypto_t **ff,
             apr_pool_cleanup_null);
 
     if (engine) {
+#if (OPENSSL_VERSION_NUMBER < 0x30000000L) || (OPENSSL_API_LEVEL < 30000)
         config->engine = ENGINE_by_id(engine);
         if (!config->engine) {
             return APR_ENOENGINE;
@@ -332,6 +341,10 @@ static apr_status_t crypto_make(apr_crypto_t **ff,
             config->engine = NULL;
             return APR_EINITENGINE;
         }
+#else
+        // FIXME: Use providers instead for OpenSSL 3.
+        return APR_ENOENGINE;
+#endif
     }
 
     return APR_SUCCESS;
