@@ -59,6 +59,10 @@
 /* Define to 1 if you have the <sql.h> header file. */
 #define HAVE_SQL_H              1
 
+#if 0 /* To be detected inside apr_crypto_openssl.c */
+/* Define to 1 if you have the 'OPENSSL_init_crypto' function. */
+#define HAVE_OPENSSL_INIT_CRYPTO    1
+#endif
 
 #endif /* APU_CONFIG_H */
 #endif /* WIN32 */

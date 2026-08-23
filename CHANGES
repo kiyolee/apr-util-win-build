@@ -1,4 +1,32 @@
                                                      -*- coding: utf-8 -*-
+Changes with APR-util 1.6.4
+
+  *) apr_brigade: Don't split the final LF in apr_brigade_split_line() to
+     avoid producing an empty bucket.  PR 64273
+     [Barnim Dzwillo <dzwillo strato.de>, Joe Orton]
+
+  *) apr_brigade: Metadata buckets are now ignored in
+     apr_brigade_split_line, apr_brigade_flatten and
+     apr_brigade_to_iovec, fixing possible undefined behaviour.  PR 68278
+     [Ben Kallus <benjamin.p.kallus.gr dartmouth.edu>, Joe Orton]
+
+  *) apr_crypto_openssl: Compatibility with OpenSSL 3.  [Yann Ylavic]
+
+  *) apr_crypto_openssl: use OPENSSL_init_crypto() to initialise OpenSSL
+     on versions 1.1+. [Graham Leggett]
+
+  *) apr_memcache: Fix name lookup to allow IPv6 as well as IPv4.
+     [Lubos Uhliarik <luhliari redhat.com>]
+
+  *) configure: Fix Berkeley DB detection with compilers enforcing
+     strict C99 compliance.  PR 66396.
+     [Florian Weimer <fweimer redhat.com>]
+
+Changes with APR-util 1.6.3
+
+  *) Correct a packaging issue in 1.6.2. The contents of the release were
+     correct, but the top level directory was misnamed.
+
 Changes with APR-util 1.6.2
 
   *) SECURITY: CVE-2022-25147 (cve.mitre.org)

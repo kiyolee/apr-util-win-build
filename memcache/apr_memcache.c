@@ -290,9 +290,9 @@ static apr_status_t conn_connect(apr_memcache_conn_t *conn)
     apr_status_t rv = APR_SUCCESS;
     apr_sockaddr_t *sa;
 #if APR_HAVE_SOCKADDR_UN
-    apr_int32_t family = conn->ms->host[0] != '/' ? APR_INET : APR_UNIX;
+    apr_int32_t family = conn->ms->host[0] != '/' ? APR_UNSPEC : APR_UNIX;
 #else
-    apr_int32_t family = APR_INET;
+    apr_int32_t family = APR_UNSPEC;
 #endif
 
     rv = apr_sockaddr_info_get(&sa, conn->ms->host, family, conn->ms->port, 0, conn->p);
@@ -300,14 +300,26 @@ static apr_status_t conn_connect(apr_memcache_conn_t *conn)
         return rv;
     }
 
-    rv = apr_socket_timeout_set(conn->sock, 1 * APR_USEC_PER_SEC);
-    if (rv != APR_SUCCESS) {
-        return rv;
+    /* Cycle through address until a connect() succeeds. */
+    for (; sa; sa = sa->next) {
+        rv = apr_socket_create(&conn->sock, sa->family, SOCK_STREAM, 0, conn->p);
+        if (rv == APR_SUCCESS) {
+            rv = apr_socket_timeout_set(conn->sock, 1 * APR_USEC_PER_SEC);
+            if (rv != APR_SUCCESS) {
+                return rv;
+            }
+
+            rv = apr_socket_connect(conn->sock, sa);
+            if (rv == APR_SUCCESS) {
+                break;
+            }
+
+            apr_socket_close(conn->sock);
+        }
     }
 
-    rv = apr_socket_connect(conn->sock, sa);
-    if (rv != APR_SUCCESS) {
-        return rv;
+    if (!sa) {
+        return APR_ECONNREFUSED;
     }
 
     rv = apr_socket_timeout_set(conn->sock, -1);
@@ -327,11 +339,6 @@ mc_conn_construct(void **conn_, void *params, apr_pool_t *pool)
     apr_pool_t *np;
     apr_pool_t *tp;
     apr_memcache_server_t *ms = params;
-#if APR_HAVE_SOCKADDR_UN
-    apr_int32_t family = ms->host[0] != '/' ? APR_INET : APR_UNIX;
-#else
-    apr_int32_t family = APR_INET;
-#endif
 
     rv = apr_pool_create(&np, pool);
     if (rv != APR_SUCCESS) {
@@ -348,13 +355,6 @@ mc_conn_construct(void **conn_, void *params, apr_pool_t *pool)
 
     conn->p = np;
     conn->tp = tp;
-
-    rv = apr_socket_create(&conn->sock, family, SOCK_STREAM, 0, np);
-
-    if (rv != APR_SUCCESS) {
-        apr_pool_destroy(np);
-        return rv;
-    }
 
     conn->buffer = apr_palloc(conn->p, BUFFER_SIZE + 1);
     conn->blen = 0;
@@ -594,6 +594,11 @@ static apr_status_t get_server_line(apr_memcache_conn_t *conn)
 
     conn->blen = bsize;
     conn->buffer[bsize] = '\0';
+
+    /* Validate CRLF line termination to prevent integer underflow attacks */
+    if (bsize < 2 || conn->buffer[bsize-2] != '\r' || conn->buffer[bsize-1] != '\n') {
+        return APR_EGENERAL;
+    }
 
     return apr_brigade_cleanup(conn->tb);
 }
@@ -1087,9 +1092,14 @@ apr_memcache_version(apr_memcache_server_t *ms,
     }
 
     if (strncmp(MS_VERSION, conn->buffer, MS_VERSION_LEN) == 0) {
-        *baton = apr_pstrmemdup(p, conn->buffer+MS_VERSION_LEN+1, 
-                                conn->blen - MS_VERSION_LEN - 2);
-        rv = APR_SUCCESS;
+        if (conn->blen < MS_VERSION_LEN + 2) {
+            rv = APR_EGENERAL;
+        }
+        else {
+            *baton = apr_pstrmemdup(p, conn->buffer+MS_VERSION_LEN+1, 
+                                    conn->blen - MS_VERSION_LEN - 2);
+            rv = APR_SUCCESS;
+       } 
     }
     else {
         rv = APR_EGENERAL;
@@ -1555,23 +1565,35 @@ apr_memcache_multgetp(apr_memcache_t *mc,
 static const char *stat_read_string(apr_pool_t *p, char *buf, apr_size_t len)
 {
     /* remove trailing \r\n and null char */
+    if (len < 2) {
+        return apr_pstrdup(p, "");
+    }
     return apr_pstrmemdup(p, buf, len-2);
 }
 
 static apr_uint32_t stat_read_uint32(apr_pool_t *p, char *buf, apr_size_t  len)
 {
+    if (len < 2) {
+        return 0;
+    }
     buf[len-2] = '\0';
     return atoi(buf);
 }
 
 static apr_uint64_t stat_read_uint64(apr_pool_t *p, char *buf, apr_size_t  len)
 {
+    if (len < 2) {
+        return 0;
+    }
     buf[len-2] = '\0';
     return apr_atoi64(buf);
 }
 
 static apr_time_t stat_read_time(apr_pool_t *p, char *buf, apr_size_t  len)
 {
+    if (len < 2) {
+        return 0;
+    }
     buf[len-2] = '\0';
     return apr_time_from_sec(atoi(buf));
 }
@@ -1583,6 +1605,9 @@ static apr_time_t stat_read_rtime(apr_pool_t *p, char *buf, apr_size_t  len)
     char *usecs;
     const char *sep = ":.";
 
+    if (len < 2) {
+        return apr_time_make(0, 0);
+    }
     buf[len-2] = '\0';
 
     secs = apr_strtok(buf, sep, &tok);
