@@ -848,19 +848,20 @@ static int dbd_oracle_query(apr_dbd_t *sql, int *nrows, const char *query)
 static const char *dbd_oracle_escape(apr_pool_t *pool, const char *arg,
                                      apr_dbd_t *sql)
 {
-    char *newstr, *src, *dst, *sq;
+    char *newstr, *dst;
+    const char *src, *sq;
     int qcount;
 
     /* return the original if there are no single-quotes */
-    if (!(sq = strchr(s, '\'')))
-        return (char *)s;
+    if (!(sq = strchr(arg, '\'')))
+        return arg;
     /* count the single-quotes and allocate a new buffer */
     for (qcount = 1; (sq = strchr(sq + 1, '\'')); )
         qcount++;
-    newstr = apr_palloc(pool, strlen(s) + qcount + 1);
+    newstr = apr_palloc(pool, strlen(arg) + qcount + 1);
 
     /* move chars, doubling all single-quotes */
-    src = (char *)s;
+    src = arg;
     for (dst = newstr; *src; src++) {
         if ((*dst++ = *src) == '\'')
             *dst++ = '\'';
