@@ -194,10 +194,8 @@ static volatile const apr_uint32_t optblocker;
  * Paper:
  *   https://cr.yp.to/papers/cryptoint-20250424.pdf
  */
-#if ((defined(__xlc__) || defined(_MSC_VER)) && !defined(__GNUC__))
 #ifndef __has_attribute
 #define __has_attribute(__x)    0
-#endif
 #endif
 
 #if __has_attribute(always_inline)
@@ -412,6 +410,10 @@ APU_DECLARE(apr_status_t) apr_crypto_error(const apu_err_t **result,
 APU_DECLARE(apr_status_t) apr_crypto_make(apr_crypto_t **f,
         const apr_crypto_driver_t *driver, const char *params, apr_pool_t *pool)
 {
+    if (!f || !driver || !pool) {
+        return APR_EINVAL;
+    }
+    *f = NULL;
     return driver->make(f, driver, params, pool);
 }
 
